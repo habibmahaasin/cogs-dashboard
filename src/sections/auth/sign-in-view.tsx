@@ -1,109 +1,80 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
-import InputAdornment from '@mui/material/InputAdornment';
-
-import { useRouter } from 'src/routes/hooks';
-
-import { Iconify } from 'src/components/iconify';
+// import { sendSignInLinkToEmail } from 'firebase/auth';
+// import { auth } from 'src/utils/firebase';
+import { toast } from 'react-toastify';
+import FakeMagicLinkDialog from './fake-magic-link';
 
 // ----------------------------------------------------------------------
 
 export function SignInView() {
-  const router = useRouter();
+  const [email, setEmail] = useState<string>('');
+  const [openMagicLink, setOpenMagicLink] = useState<boolean>(false);
 
-  const [showPassword, setShowPassword] = useState(false);
+  // const handleSendLink = async () => {
+  //   if (!email) return toast.error('Email is required');
 
-  const handleSignIn = useCallback(() => {
-    router.push('/');
-  }, [router]);
+  //   const actionCodeSettings = {
+  //     url: `${window.location.origin}/auth/callback`,
+  //     handleCodeInApp: true,
+  //   };
 
-  const renderForm = (
-    <Box display="flex" flexDirection="column" alignItems="flex-end">
-      <TextField
-        fullWidth
-        name="email"
-        label="Email address"
-        defaultValue="hello@gmail.com"
-        InputLabelProps={{ shrink: true }}
-        sx={{ mb: 3 }}
-      />
+  //   try {
+  //     await sendSignInLinkToEmail(auth, email, actionCodeSettings);
+  //     toast.success(`The sign-in link has been sent to ${email}`);
+  //     localStorage.setItem('emailForSignIn', email);
+  //   } catch (error) {
+  //     toast.error(error.message);
+  //   }
 
-      <Link variant="body2" color="inherit" sx={{ mb: 1.5 }}>
-        Forgot password?
-      </Link>
-
-      <TextField
-        fullWidth
-        name="password"
-        label="Password"
-        defaultValue="@demo1234"
-        InputLabelProps={{ shrink: true }}
-        type={showPassword ? 'text' : 'password'}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                <Iconify icon={showPassword ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-        sx={{ mb: 3 }}
-      />
-
-      <LoadingButton
-        fullWidth
-        size="large"
-        type="submit"
-        color="inherit"
-        variant="contained"
-        onClick={handleSignIn}
-      >
-        Sign in
-      </LoadingButton>
-    </Box>
-  );
+  //   return null;
+  // };
 
   return (
     <>
+      <FakeMagicLinkDialog
+        openMagicLink={openMagicLink}
+        setOpenMagicLink={setOpenMagicLink}
+        action="Sign in"
+        email={email}
+      />
       <Box gap={1.5} display="flex" flexDirection="column" alignItems="center" sx={{ mb: 5 }}>
         <Typography variant="h5">Sign in</Typography>
-        <Typography variant="body2" color="text.secondary">
-          Don’t have an account?
-          <Link variant="subtitle2" sx={{ ml: 0.5 }}>
-            Get started
-          </Link>
-        </Typography>
       </Box>
+      <Box display="flex" flexDirection="column" alignItems="flex-end">
+        <TextField
+          fullWidth
+          name="email"
+          required
+          label="Email address"
+          InputLabelProps={{ shrink: true }}
+          sx={{ mb: 3 }}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="example@gmail.com"
+        />
 
-      {renderForm}
+        <LoadingButton
+          fullWidth
+          size="large"
+          type="submit"
+          color="inherit"
+          variant="contained"
+          onClick={() => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      <Divider sx={{ my: 3, '&::before, &::after': { borderTopStyle: 'dashed' } }}>
-        <Typography
-          variant="overline"
-          sx={{ color: 'text.secondary', fontWeight: 'fontWeightMedium' }}
+            if (!email) return toast.error('Email is required');
+            if (!emailRegex.test(email)) return toast.error('Invalid email format');
+
+            return setOpenMagicLink(true);
+          }}
         >
-          OR
-        </Typography>
-      </Divider>
-
-      <Box gap={1} display="flex" justifyContent="center">
-        <IconButton color="inherit">
-          <Iconify icon="logos:google-icon" />
-        </IconButton>
-        <IconButton color="inherit">
-          <Iconify icon="eva:github-fill" />
-        </IconButton>
-        <IconButton color="inherit">
-          <Iconify icon="ri:twitter-x-fill" />
-        </IconButton>
+          Sign in
+        </LoadingButton>
       </Box>
     </>
   );

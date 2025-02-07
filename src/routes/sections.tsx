@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, ReactNode, Suspense } from 'react';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
@@ -10,12 +10,11 @@ import { DashboardLayout } from 'src/layouts/dashboard';
 
 // ----------------------------------------------------------------------
 
-export const HomePage = lazy(() => import('src/pages/home'));
-export const BlogPage = lazy(() => import('src/pages/blog'));
 export const InventoryPage = lazy(() => import('src/pages/inventory'));
 export const SignInPage = lazy(() => import('src/pages/sign-in'));
-export const ProductsPage = lazy(() => import('src/pages/products'));
+export const RecipePage = lazy(() => import('src/pages/recipe'));
 export const Page404 = lazy(() => import('src/pages/page-not-found'));
+export const AuthCallback = lazy(() => import('src/pages/auth-callback'));
 
 // ----------------------------------------------------------------------
 
@@ -32,28 +31,46 @@ const renderFallback = (
   </Box>
 );
 
+const isAuthenticated = () => !!localStorage.getItem('token');
+
+const PrivateRoute = ({ children }: { children: ReactNode }) =>
+  isAuthenticated() ? children : <Navigate to="/sign-in" replace />;
+
+const PublicRoute = ({ children }: { children: ReactNode }) =>
+  isAuthenticated() ? <Navigate to="/" replace /> : children;
+
 export function Router() {
   return useRoutes([
     {
       element: (
-        <DashboardLayout>
-          <Suspense fallback={renderFallback}>
-            <Outlet />
-          </Suspense>
-        </DashboardLayout>
+        <PrivateRoute>
+          <DashboardLayout>
+            <Suspense fallback={renderFallback}>
+              <Outlet />
+            </Suspense>
+          </DashboardLayout>
+        </PrivateRoute>
       ),
       children: [
-        { element: <HomePage />, index: true },
-        { path: 'inventory', element: <InventoryPage /> },
-        { path: 'products', element: <ProductsPage /> },
-        { path: 'blog', element: <BlogPage /> },
+        { element: <InventoryPage />, index: true },
+        { path: 'recipe', element: <RecipePage /> },
       ],
     },
     {
       path: 'sign-in',
       element: (
+        <PublicRoute>
+          <AuthLayout>
+            <SignInPage />
+          </AuthLayout>
+        </PublicRoute>
+      ),
+    },
+    {
+      path: 'auth/callback',
+      element: (
         <AuthLayout>
-          <SignInPage />
+          <AuthCallback />
         </AuthLayout>
       ),
     },

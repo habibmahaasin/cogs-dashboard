@@ -180,8 +180,6 @@ export function NavContent({ data, slots, sx }: NavContentProps) {
       </Scrollbar>
 
       {slots?.bottomArea}
-
-      {/* <NavUpgrade /> */}
     </>
   );
 }

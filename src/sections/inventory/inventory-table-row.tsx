@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-
+import { fCurrency } from 'src/utils/format-number';
 import Box from '@mui/material/Box';
 import { Portal } from '@mui/material';
 import Popover from '@mui/material/Popover';
@@ -12,7 +12,6 @@ import MenuItem, { menuItemClasses } from '@mui/material/MenuItem';
 import { Iconify } from 'src/components/iconify';
 import { InventoryItem } from 'src/_mock';
 import useInventory from 'src/hooks/use-inventory';
-import AlertDialogSlide from 'src/components/dialog/dialog';
 import FormDialog from './form-dialog';
 import DeleteDialog from './delete-confirmation-dialog';
 
@@ -69,7 +68,7 @@ export function UserTableRow({ row, selected, onSelectRow }: InventoryTableRowPr
         <TableCell>{row.qty}</TableCell>
 
         <TableCell>{row.uom}</TableCell>
-        <TableCell>{row.price_per_qty}</TableCell>
+        <TableCell>{fCurrency(row.price_per_qty)}</TableCell>
 
         <TableCell align="right">
           <IconButton onClick={handleOpenPopover}>

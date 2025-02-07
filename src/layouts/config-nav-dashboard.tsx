@@ -9,38 +9,13 @@ const icon = (name: string) => (
 
 export const navData = [
   {
-    title: 'Dashboard',
+    title: 'Inventory',
     path: '/',
     icon: icon('ic-analytics'),
   },
   {
-    title: 'Inventory',
-    path: '/inventory',
-    icon: icon('ic-user'),
+    title: 'Recipe',
+    path: '/recipe',
+    icon: icon('ic-cart'),
   },
-  // {
-  //   title: 'Product',
-  //   path: '/products',
-  //   icon: icon('ic-cart'),
-  //   info: (
-  //     <Label color="error" variant="inverted">
-  //       +3
-  //     </Label>
-  //   ),
-  // },
-  // {
-  //   title: 'Blog',
-  //   path: '/blog',
-  //   icon: icon('ic-blog'),
-  // },
-  // {
-  //   title: 'Sign in',
-  //   path: '/sign-in',
-  //   icon: icon('ic-lock'),
-  // },
-  // {
-  //   title: 'Not found',
-  //   path: '/404',
-  //   icon: icon('ic-disabled'),
-  // },
 ];

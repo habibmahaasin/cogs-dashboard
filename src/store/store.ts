@@ -3,18 +3,19 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { combineReducers } from 'redux';
 
-import counterReducer from './slices/counterSlice';
 import inventorySlice from './slices/inventorySlice';
+import recipeSlice from './slices/recipeSlice';
 
 const persistConfig = {
   key: 'root',
   storage,
   whitelist: ['counter', 'inventory'],
+  blacklist: ['recipe'],
 };
 
 const rootReducer = combineReducers({
-  counter: counterReducer,
   inventory: inventorySlice,
+  recipe: recipeSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
