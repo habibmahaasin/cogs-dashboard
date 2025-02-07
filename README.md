@@ -42,6 +42,8 @@ The application should now be running on `http://localhost:3039/` (or another av
 - **Minimals UI Kit** – Codebase foundation
 - **Firebase** – (Testing for MagicLink authentication, but currently unused)
 - **js-base64** – Encoding and decoding email & dummy token
+- **Redux Toolkit** – State Management
+- **Axios** – Api Interceptors
 - **[package.json](./package.json)** – Other module
 
 ## Contributing
