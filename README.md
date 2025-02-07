@@ -15,11 +15,11 @@ Ensure you have the following installed:
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/your-repository.git
+   git clone https://github.com/habibmahaasin/cogs-dashboard.git
    ```
 2. Navigate to the project directory:
    ```sh
-   cd your-repository
+   cd cogs-dashboard
    ```
 3. Install dependencies:
    ```sh
