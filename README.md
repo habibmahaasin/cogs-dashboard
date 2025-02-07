@@ -1,48 +1,53 @@
-## Minimal UI ([Free version](https://free.minimals.cc/))
+# Project Setup
 
-![license](https://img.shields.io/badge/license-MIT-blue.svg)
+## How to Set Up and Run the Application Locally
 
-![preview](public/assets/images/minimal-free-preview.jpg)
+Follow these steps to install and run the application on your local machine.
 
-> Free React Admin Dashboard made with Material-UI components and React + Vite.js.
+### Prerequisites
 
-## Pages
+Ensure you have the following installed:
 
-- [Dashboard](https://free.minimals.cc/)
-- [Users](https://free.minimals.cc/user)
-- [Products](https://free.minimals.cc/products)
-- [Blog](https://free.minimals.cc/blog)
-- [Sign in](https://free.minimals.cc/sign-in)
-- [Not found](https://free.minimals.cc/404)
+- [Node.js](https://nodejs.org/) (Latest LTS recommended)
+- [npm](https://www.npmjs.com/) (Comes with Node.js)
 
-## Quick start
+### Installation
 
-- Clone the repo: `git clone https://github.com/minimal-ui-kit/material-kit-react.git`
-- Recommended: `Node.js v20.x`
-- **Install:** `npm i` or `yarn install`
-- **Start:** `npm run dev` or `yarn dev`
-- **Build:** `npm run build` or `yarn build`
-- Open browser: `http://localhost:3039`
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/your-repository.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd your-repository
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
 
-## Upgrade to PRO Version
+### Running the Application
 
-| Minimal Free                | [Minimal Pro](https://material-ui.com/store/items/minimal-dashboard/)                                   |
-| :-------------------------- | :------------------------------------------------------------------------------------------------------ |
-| **6** Pages                 | **70+** Pages                                                                                           |
-| **Partial** theme customize | **Fully** theme customize                                                                               |
-| -                           | **Next.js** version                                                                                     |
-| -                           | **TypeScript** version (Standard Plus and Extended license)                                             |
-| -                           | Design **Figma** file (Standard Plus and Extended license)                                              |
-| -                           | Authentication with **Amplify**, **Auth0**, **JWT**, **Firebase** and **Supabase**                      |
-| -                           | Light/dark mode, right-to-left, form validation... ([+more components](https://minimals.cc/components)) |
-| -                           | Complete users flows                                                                                    |
-| -                           | 1 year of free updates / 6 months of technical support                                                  |
-| -                           | Learn more: [Package & license](https://docs.minimals.cc/package)                                       |
+To start the development server, run:
+
+```sh
+npm run dev
+```
+
+The application should now be running on `http://localhost:3039/` (or another available port).
+
+## Libraries & Tools Used
+
+- **Material UI** – UI framework for React components
+- **Minimals UI Kit** – Codebase foundation
+- **Firebase** – (Testing for MagicLink authentication, but currently unused)
+- **js-base64** – Encoding and decoding email & dummy token
+- **[package.json](./package.json)** – Other module
+
+## Contributing
+
+Feel free to submit issues or pull requests to improve the project.
 
 ## License
 
-Distributed under the [MIT](https://github.com/minimal-ui-kit/minimal.free/blob/main/LICENSE.md) license.
-
-## Contact us
-
-Email: support@minimals.cc
+This project is licensed under the [MIT License](LICENSE).
